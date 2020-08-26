@@ -1,13 +1,181 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --blue: #4f63ff;
+  --red: #ff005c;
+  --green: #28b759;
+  --navy: #182655;
+  --gray-1: #9ba1b5;
+  --gray-2: #666666;
+  --gray-3: #7e7e7e;
+  --gray-4: #939496;
+  --offwhite: #f2f2f2;
+  --border-color: #9ba1b540;
+  --gap: 10px;
+}
+
+.App {
+  display: flex;
+  height: 100vh;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.wgi-card {
+  --bg-color: #ffffff;
+  --tab-text-color: var(--gray-1);
+  --tab-active-text-color: var(--navy);
+  --tab-bg-color: var(--offwhite);
+
+  width: 353px;
+  min-height: 112px;
+  background: var(--bg-color);
+  font-family: "Avenir", "Helvetica Neue", "Gill Sans";
+  border-radius: 5px;
+  box-shadow: 0px 5px 20px rgba(210, 216, 236, 0.3);
+  overflow: hidden;
+  transition: background 0.15s ease-in;
+}
+
+.wgi-card.dark {
+  --bg-color: #27292d;
+  --gray-2: #fff;
+  --tab-text-color: var(--gray-4);
+  --tab-active-text-color: #fff;
+  --tab-bg-color: #383b40;
+}
+
+.wgi-card.up {
+  --surge-color: var(--red);
+}
+
+.wgi-card.down {
+  --surge-color: var(--green);
+}
+
+.wgi-card > section {
+  padding: 1rem;
+}
+
+.wgi-card > section > * + * {
+  margin-top: var(--gap);
+}
+
+.wgi-card .wgi-caption {
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.6rem;
+  color: var(--gray-3);
+}
+
+.wgi-card .percentage > p {
+  font-family: Avenir;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 36px;
+  margin: 0;
+  line-height: 30px;
+  margin-right: var(--gap);
+
+  color: var(--blue);
+}
+
+.wgi-card .percentage > span {
+  font-size: 0.875;
+  color: var(--surge-color);
+}
+
+.wgi-card .ghost-btn {
+  appearance: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.wgi-card .source {
+  color: var(--gray-1);
+  font-weight: 100;
+  margin-bottom: 0;
+}
+
+.wgi-card .source span {
+  font-size: 0.5rem;
+  margin-left: 7px;
+  font-weight: 300;
+}
+
+.arrow {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  background: var(--surge-color);
+}
+
+.wgi-card.down .arrow {
+  transform: rotate(180deg);
+}
+
+.wgi-card footer {
+  border-top: solid 0.2px var(--border-color);
+}
+
+.wgi-card footer > button {
+  flex: 1;
+  text-align: center;
+  padding: 10px 15px;
+  color: var(--tab-text-color);
+  border: none;
+  background-color: transparent;
+}
+
+.wgi-card footer > button.active {
+  color: var(--tab-active-text-color);
+  background-color: var(--tab-bg-color);
+}
+
+.wgi-card footer > button:not(:last-child) {
+  border-right: solid 0.2px var(--border-color);
 }

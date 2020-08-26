@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import POSFailureRateCard from "./components/POSFailureRateCard";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App justify-center items-center">
+      <div className="flex flex-col">
+        <POSFailureRateCard
+          percentage="12%"
+          surge={{ direction: "down", percentage: "14%" }}
+        />
+        <div style={{ margin: "10px" }}></div>
+        <POSFailureRateCard
+          percentage="16%"
+          surge={{ direction: "up", percentage: "18%" }}
+        />
+      </div>
     </div>
   );
 }
