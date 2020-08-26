@@ -5,7 +5,9 @@ const ProgressBar = (props) => {
   return (
     <div className="wgi-progress-bar">
       <span style={{ width: props.percentage }}></span>
-      {props.withHandle && <span className="handle" />}
+      {props.withHandle && (
+        <span className="handle" style={{ left: props.percentage }} />
+      )}
     </div>
   );
 };

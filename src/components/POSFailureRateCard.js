@@ -8,13 +8,14 @@ const Card = (props) => {
   const { mode: layoutMode, toggleMode: toggleLayoutMode } = useLayoutMode(
     props.layoutMode
   );
+  const { direction, percentage } = props.surge;
 
   return (
     <div
       className={[
         "wgi-card flex flex-col",
         forMode("", "dark"),
-        props.surge.direction,
+        direction,
         layoutMode,
       ].join(" ")}
     >
@@ -42,12 +43,19 @@ const Card = (props) => {
             </button>
           </div>
         </div>
-        <div className="percentage flex items-end">
-          <p>{props.percentage}</p>
-          <span>
-            <div className="arrow" />
-            {props.surge.percentage}
-          </span>
+        <div className="flex flex-row justify-between items-center">
+          <div className="percentage flex items-end">
+            <p>{props.percentage}</p>
+            <span>
+              <div className="arrow" />
+              {percentage}
+            </span>
+          </div>
+          {direction === "down" && (
+            <div className="flex-1" style={{ maxWidth: "100px" }}>
+              <ProgressBar percentage={percentage} withHandle={true} />
+            </div>
+          )}
         </div>
         <p className="source flex items-center justify-end">
           <Info width={10} height={10} fill="var(--gray-1)" />
@@ -55,8 +63,14 @@ const Card = (props) => {
             Source <b>NIBSS</b>
           </span>
         </p>
-        <ProgressBar percentage={props.percentage} />
+
+        {direction === "up" && (
+          <div class="wgi-progress-bar-footer">
+            <ProgressBar percentage={props.percentage} />
+          </div>
+        )}
       </section>
+
       <footer className="flex">
         <button className="flex-1 active">Daily</button>
         <button className="flex-1">Monthly</button>
