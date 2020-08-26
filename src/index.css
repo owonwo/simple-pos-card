@@ -111,18 +111,45 @@ code {
 
 .wgi-card > section {
   padding: 1rem;
+  display: grid;
+  grid-gap: var(--gap);
+  grid-template:
+    "header header" auto
+    "percentage progress" auto
+    "... source" 10px / 1fr max(100px);
   flex: 1;
 }
 
-.wgi-card > section > * + * {
-  margin-top: var(--gap);
+.wgi-card.minimal > section {
+  grid-template:
+    "header" auto
+    "percentage" auto
+    "progress" 10px / 1fr;
+}
+
+.wgi-card section > header {
+  grid-area: header;
+}
+
+.wgi-card .source {
+  grid-area: source;
 }
 
 .wgi-card .wgi-caption {
+  grid-area: header;
   letter-spacing: 1px;
   text-transform: uppercase;
   font-size: 0.6rem;
   color: var(--gray-3);
+}
+
+.wgi-card .percentage {
+  grid-area: percentage;
+}
+
+.wgi-card .p-progress {
+  grid-area: progress;
+  align-self: center;
 }
 
 .wgi-card .percentage > p {
@@ -137,7 +164,7 @@ code {
 }
 
 .wgi-card .percentage > span {
-  font-size: 0.875;
+  font-size: 0.875rem;
   color: var(--surge-color);
 }
 
@@ -157,6 +184,7 @@ button {
   color: var(--gray-1);
   font-weight: 100;
   margin-bottom: 0;
+  margin-top: 0;
 }
 
 .wgi-card .source span {

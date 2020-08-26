@@ -5,9 +5,11 @@ import ProgressBar from "./ProgressBar";
 
 const Card = (props) => {
   const { forMode, isLightMode, toggleMode } = useDarkMode();
-  const { mode: layoutMode, toggleMode: toggleLayoutMode } = useLayoutMode(
-    props.layoutMode
-  );
+  const {
+    mode: layoutMode,
+    isLayout,
+    toggleMode: toggleLayoutMode,
+  } = useLayoutMode(props.layoutMode);
   const { direction, percentage } = props.surge;
 
   return (
@@ -19,8 +21,8 @@ const Card = (props) => {
         layoutMode,
       ].join(" ")}
     >
-      <section className="flex flex-col">
-        <div className="flex flex-row justify-between">
+      <section>
+        <header className="flex flex-row justify-between">
           <div className="wgi-caption">POS FAILURE RATE</div>
           <div>
             <button
@@ -42,33 +44,29 @@ const Card = (props) => {
               )}
             </button>
           </div>
+        </header>
+
+        <div className="percentage flex items-end">
+          <p>{props.percentage}</p>
+          <span>
+            <div className="arrow" />
+            {percentage}
+          </span>
         </div>
-        <div className="flex flex-row justify-between items-center">
-          <div className="percentage flex items-end">
-            <p>{props.percentage}</p>
-            <span>
-              <div className="arrow" />
-              {percentage}
-            </span>
-          </div>
-          {direction === "down" && (
-            <div className="flex-1" style={{ maxWidth: "100px" }}>
-              <ProgressBar percentage={percentage} withHandle={true} />
-            </div>
-          )}
+
+        <div className="p-progress flex-1">
+          <ProgressBar
+            percentage={props.percentage}
+            withHandle={isLayout("compact") || isLayout("full")}
+          />
         </div>
+
         <p className="source flex items-center justify-end">
           <Info width={10} height={10} fill="var(--gray-1)" />
           <span>
             Source <b>NIBSS</b>
           </span>
         </p>
-
-        {direction === "up" && (
-          <div class="wgi-progress-bar-footer">
-            <ProgressBar percentage={props.percentage} />
-          </div>
-        )}
       </section>
 
       <footer className="flex">
