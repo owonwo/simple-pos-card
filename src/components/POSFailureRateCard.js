@@ -1,10 +1,13 @@
 import React from "react";
+import t from "prop-types";
 import { Moon, Panes, Info, Sun } from "./Icons";
+import ProgressBar from "./ProgressBar";
 
 const Card = (props) => {
-  // use dark mode
   const { forMode, isLightMode, toggleMode } = useDarkMode();
-  const { isLayout, toggleMode: toggleLayoutMode } = useLayoutMode();
+  const { mode: layoutMode, toggleMode: toggleLayoutMode } = useLayoutMode(
+    props.layoutMode
+  );
 
   return (
     <div
@@ -12,8 +15,8 @@ const Card = (props) => {
         "wgi-card flex flex-col",
         forMode("", "dark"),
         props.surge.direction,
+        layoutMode,
       ].join(" ")}
-      direction={props.surge.direction}
     >
       <section className="flex flex-col">
         <div className="flex flex-row justify-between">
@@ -46,24 +49,26 @@ const Card = (props) => {
             {props.surge.percentage}
           </span>
         </div>
-        {(isLayout("compact") || isLayout("full")) && (
-          <p className="source flex items-center justify-end">
-            <Info width={10} height={10} fill="var(--gray-1)" />
-            <span>
-              Source <b>NIPSS</b>
-            </span>
-          </p>
-        )}
+        <p className="source flex items-center justify-end">
+          <Info width={10} height={10} fill="var(--gray-1)" />
+          <span>
+            Source <b>NIBSS</b>
+          </span>
+        </p>
+        <ProgressBar percentage={props.percentage} />
       </section>
-      {isLayout("full") && (
-        <footer className="flex">
-          <button className="flex-1 active">Daily</button>
-          <button className="flex-1">Monthly</button>
-          <button className="flex-1">Annually</button>
-        </footer>
-      )}
+      <footer className="flex">
+        <button className="flex-1 active">Daily</button>
+        <button className="flex-1">Monthly</button>
+        <button className="flex-1">Annually</button>
+      </footer>
     </div>
   );
+};
+
+Card.propTypes = {
+  percentage: t.string.isRequired,
+  layoutMode: t.oneOf(["minimal", "compact", "full"]),
 };
 
 const useDarkMode = () => {
@@ -75,18 +80,20 @@ const useDarkMode = () => {
   return { forMode, isLightMode, toggleMode };
 };
 
-const useLayoutMode = () => {
+const useLayoutMode = (preferredMode) => {
   const modes = ["minimal", "compact", "full"];
-  const [modeIndex, setIndex] = React.useState(1);
-  const isLayout = (mode) => mode === modes[modeIndex];
+  const defaultState = preferredMode ? modes.indexOf(preferredMode) : 0;
+  const [index, setIndex] = React.useState(defaultState);
+
+  const isLayout = (mode) => mode === modes[index];
+
   const toggleMode = () => {
-    const newMode = modeIndex + 1;
-    console.log("newMode", newMode);
+    const newMode = index + 1;
     if (newMode > 2) return setIndex(0);
     if (newMode > -1) return setIndex(newMode);
   };
 
-  return { isLayout, toggleMode };
+  return { isLayout, toggleMode, mode: modes[index] };
 };
 
 export default Card;

@@ -7,12 +7,14 @@ function App() {
     <div className="App justify-center items-center">
       <div className="flex flex-col">
         <POSFailureRateCard
-          percentage="12%"
+          percentage="15%"
+          layoutMode="full"
           surge={{ direction: "down", percentage: "14%" }}
         />
         <div style={{ margin: "10px" }}></div>
         <POSFailureRateCard
-          percentage="16%"
+          percentage="65%"
+          layoutMode="minimal"
           surge={{ direction: "up", percentage: "18%" }}
         />
       </div>

@@ -72,11 +72,17 @@ code {
   width: 353px;
   min-height: 112px;
   background: var(--bg-color);
-  font-family: "Avenir", "Helvetica Neue", "Gill Sans";
+  font-family: "Avenir", "Helvetica Neue", "Gill Sans", sans-serif;
   border-radius: 5px;
+  user-select: none;
   box-shadow: 0px 5px 20px rgba(210, 216, 236, 0.3);
   overflow: hidden;
-  transition: background 0.15s ease-in;
+}
+
+.wgi-card,
+.wgi-card .wgi-progress-bar,
+.wgi-card footer button {
+  transition: all 0.15s ease-in;
 }
 
 .wgi-card.dark {
@@ -97,6 +103,7 @@ code {
 
 .wgi-card > section {
   padding: 1rem;
+  flex: 1;
 }
 
 .wgi-card > section > * + * {
@@ -111,7 +118,6 @@ code {
 }
 
 .wgi-card .percentage > p {
-  font-family: Avenir;
   font-style: normal;
   font-weight: 900;
   font-size: 36px;
@@ -132,6 +138,7 @@ code {
   border: none;
   background: none;
   cursor: pointer;
+  outline: none;
 }
 
 .wgi-card .source {
@@ -158,6 +165,13 @@ code {
   transform: rotate(180deg);
 }
 
+.wgi-card .wgi-progress-bar {
+  width: auto;
+  margin-right: -10px;
+  transform: translateY(15px);
+  margin-left: -10px;
+}
+
 .wgi-card footer {
   border-top: solid 0.2px var(--border-color);
 }
@@ -178,4 +192,40 @@ code {
 
 .wgi-card footer > button:not(:last-child) {
   border-right: solid 0.2px var(--border-color);
+}
+
+/** Progress Bar **/
+.wgi-progress-bar {
+  background-color: var(--tab-bg-color);
+  display: none;
+  border-radius: 3px;
+  height: 5px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.wgi-progress-bar > span {
+  display: block;
+  background-color: var(--surge-color);
+  height: 5px;
+  width: 0%;
+  border-radius: 5px;
+  transition: width 0.3s ease-in-out 1s;
+}
+
+/** Layout Shifts **/
+.wgi-card.minimal .source {
+  display: none;
+}
+
+.wgi-card.minimal footer {
+  display: none;
+}
+
+.wgi-card.compact footer {
+  display: none;
+}
+
+.wgi-card.up.minimal .wgi-progress-bar {
+  display: block;
 }
