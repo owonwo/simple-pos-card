@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import POSFailureRateCard from "./components/POSFailureRateCard";
 
 function App() {
@@ -8,7 +7,7 @@ function App() {
       <div className="flex flex-col">
         <POSFailureRateCard
           percentage="15%"
-          layoutMode="full"
+          layoutMode="minimal"
           surge={{ direction: "down", percentage: "14%" }}
         />
         <div style={{ margin: "10px" }}></div>

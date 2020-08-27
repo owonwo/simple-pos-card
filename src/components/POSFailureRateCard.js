@@ -6,8 +6,8 @@ import ProgressBar from "./ProgressBar";
 const Card = (props) => {
   const { forMode, isLightMode, toggleMode } = useDarkMode();
   const {
-    mode: layoutMode,
     isLayout,
+    mode: layoutMode,
     toggleMode: toggleLayoutMode,
   } = useLayoutMode(props.layoutMode);
   const { direction, percentage } = props.surge;
@@ -81,6 +81,10 @@ const Card = (props) => {
 Card.propTypes = {
   percentage: t.string.isRequired,
   layoutMode: t.oneOf(["minimal", "compact", "full"]),
+  surge: t.shape({
+    percentage: t.string.isRequired,
+    direction: t.oneOf(["up", "down"]).isRequired,
+  }).isRequired,
 };
 
 const useDarkMode = () => {
