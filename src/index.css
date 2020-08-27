@@ -170,6 +170,7 @@ code {
 
 button {
   cursor: pointer;
+  outline: none;
 }
 
 .wgi-card .ghost-btn {
